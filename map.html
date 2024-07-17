@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="map.css" rel="stylesheet" type="text/css" />
+    <script src="map.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+     <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7iQrzqGJrNVshZ3YHJQrK4N2V3a6QBjc&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+  </head>
+  <body class="map">
+
+    <nav class="navbar">
+      <div class="media">
+        <li><img class="social" alt="instagram" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/768px-Instagram_logo_2016.svg.png"></li>
+        <li><img class="social" alt="email" src="https://pngimg.com/uploads/email/email_PNG11.png"></li>
+        </li><img class="social" alt="facebook" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"></li>
+      
+      
+
+      <div class="bar">
+        <h3 class="title">COVID Watch </h3>
+        <li><a id="home" href="index.html">Home</a></li>
+        <li><a id="map" href="map.html">Map</a></li>
+        <li><a id="info" href="resource.html">Information</a></li>
+        <li><a id="us" href="about-us.html">About </a></li>
+      </div>
+    </nav>
+
+  <iframe style="width:100%;border:none;min-height:600px" src="https://my.castlighthealth.com/corona-virus-testing-sites/?embed=true&from=ABC&assessment=true"></iframe>
+
+  <iframe src="https://ourworldindata.org/coronavirus-data-explorer?tab=map&zoomToSelection=true&country=~OWID_WRL&casesMetric=true&interval=total&hideControls=true&smoothing=0&pickerMetric=location&pickerSort=asc" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
+
+
+
+  <!-- Google Maps Stuff that didn't work haha
+  <div class="map-container">
+    <input
+      id="pac-input"
+      class="controls"
+      type="text"
+      placeholder="Search Box"
+    ></input>
+   <div id='map' class='map'></div>
+  </div>
+
+    <script>
+      "use strict";
+
+      let map;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: {
+            lat: 38.0241433,
+            lng: -122.26811819999999
+          },
+          zoom: 8
+        });
+      }
+
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7iQrzqGJrNVshZ3YHJQrK4N2V3a6QBjc&libraries=places">
+      function initAutocomplete() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: {
+            lat: -33.8688,
+            lng: 151.2195
+          },
+          zoom: 13,
+          mapTypeId: "roadmap"
+        }); // Create the search box and link it to the UI element.
+
+        const input = document.getElementById("pac-input");
+        const searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input); // Bias the SearchBox results towards current map's viewport.
+
+        map.addListener("bounds_changed", () => {
+          searchBox.setBounds(map.getBounds());
+        });
+        let markers = []; // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+
+        searchBox.addListener("places_changed", () => {
+          const places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          } // Clear out the old markers.
+
+          markers.forEach(marker => {
+            marker.setMap(null);
+          });
+          markers = []; // For each place, get the icon, name and location.
+
+          const bounds = new google.maps.LatLngBounds();
+          places.forEach(place => {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+
+            const icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            }; // Create a marker for each place.
+
+            markers.push(
+              new google.maps.Marker({
+                map,
+                icon,
+                title: place.name,
+                position: place.geometry.location
+              })
+            );
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      }
+
+
+    </script>
+  <body>
+  
+
+<!-- I will uncomment this soon!    
+<form action="/action_page.php" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin">
+<center><h2 class="w3-center">WHERE ARE YOU RIGHT NOW?</h2></center>
+<center><p>FIGURE OUT HOW MANY PEOPLE ARE IN YOUR AREA</p></center>
+ 
+<div class="area">
+  <div class="columns" style="inputRows"><i class="UserInput"></i></div>
+    <div class="rest">
+      <center><input class="border" name="first" type="text" placeholder="Country"></center>
+    </div>
+</div>
+
+<div class="area">
+  <div class="columns" style="inputRows"><i class="UserInput"></i></div>
+    <div class="rest">
+      <center><input class="border" name="last" type="text" placeholder="State"></center>
+    </div>
+</div>
+
+<div class="area">
+  <div class="columns" style="inputRows"><i class="UserInput"></i></div>
+    <div class="rest">
+      <center><input class="border" name="email" type="text" placeholder="City"></center>
+    </div>
+</div>
+
+<div class="area">
+  <div class="columns" style="inputRows"><i class="UserInput"></i></div>
+    <div class="rest">
+      <center><input class="border" name="phone" type="text" placeholder="Address"></center>
+    </div>
+</div>
+
+
+  <center><button class="submit">FIND OUT IT YOU'RE IN A HOT SPOT</button>
+  </center>
+-->
+
+
+
+  </body>
+</html>
